@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'IntelOneMono';
+    src: url('/fonts/static/IntelOneMono-Regular.ttf');
+}
+.intel-one-mono{
+    font-family: 'IntelOneMono';
+    font-weight: 500;
+}
