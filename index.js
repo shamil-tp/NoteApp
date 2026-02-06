@@ -1,5 +1,22 @@
 const express = require('express')
+const os = require('os')
 const app = express()
+
+const interfaces = os.networkInterfaces()
+
+let hostname
+// console.log(Object.keys(interfaces))
+for (const name of Object.keys(interfaces)){
+    for(const ip of Object.values(interfaces[name])){
+        if(ip.family == "IPv4" && !ip.internal){
+            hostname = ip.address
+        }
+    }
+}
+if(!hostname){
+    hostname='127.0.0.1'
+}
+
 
 app.set('view engine','ejs')
 app.use(express.static('static'))
@@ -66,6 +83,7 @@ app.use((req,res)=>{
     return res.redirect('/')
 })
 
-app.listen(3000,()=>{
-    console.log('app is running')
+app.listen(3000,hostname,()=>{
+    console.log(`app is running at http://${hostname}:3000`)
+    // 192.168.29.178
 })
