@@ -2,20 +2,33 @@ const express = require('express')
 const os = require('os')
 const app = express()
 
-const interfaces = os.networkInterfaces()
 
-let hostname
 // console.log(Object.keys(interfaces))
-for (const name of Object.keys(interfaces)){
-    for(const ip of Object.values(interfaces[name])){
-        if(ip.family == "IPv4" && !ip.internal){
-            hostname = ip.address
+let lastKnownIp = null
+
+function findIp(){
+    const interfaces = os.networkInterfaces()
+    for (const name of Object.keys(interfaces)){
+        for(const ip of Object.values(interfaces[name])){
+            if(ip.family == "IPv4" && !ip.internal){
+                return ip.address
+            }
         }
     }
+    return null
 }
-if(!hostname){
-    hostname='127.0.0.1'
-}
+let hostname
+
+let polling = setInterval(() => {
+    hostname = findIp()
+    if (hostname == lastKnownIp){
+        if(!hostname){
+            hostname='127.0.0.1'
+        }
+    }
+}, 1000);
+
+
 
 
 app.set('view engine','ejs')
