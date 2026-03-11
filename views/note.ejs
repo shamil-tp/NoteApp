@@ -1,38 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/bootstrap/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body class="bg-secondary">
-    <ul class="nav bg-dark text-white">
-  <li class="nav-item">
-    <a class="nav-link" href="/">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#"></a>
-  </li>
-</ul>
-<div class="row p-4">
-    <div class="col-6 offset-3">
-    <div class="d-flex flex-column justify-content-between bg-dark" 
-         style="width: 100%; height: 500px; border: 6px solid rgb(255, 207, 130); border-radius: 10px;">
-        
-        <p style="font-size: 24px; font-weight: 500; overflow-y: scroll;" class="p-5 intel-one-mono text-white">
-            <%=viewNote.text%>
-        </p>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <div class="d-grid gap-2 p-3">
-            <button class="btn btn-outline-warning ms-auto" style="width: 25%;">
-                <a href="/update/<%=viewNote.id%>" class="text-white">Update</a>
-            </button>
-        </div>
-    </div>
+<title>View Note</title>
+
+<link rel="stylesheet" href="/bootstrap/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+
+body{
+background:#f5f7fb;
+}
+
+.navbar-brand{
+font-weight:700;
+letter-spacing:1px;
+}
+
+.card{
+border:none;
+border-radius:15px;
+box-shadow:0 6px 20px rgba(0,0,0,0.06);
+}
+
+.note-content{
+font-size:18px;
+line-height:1.7;
+white-space:pre-wrap;
+max-height:400px;
+overflow-y:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+<div class="container">
+<a class="navbar-brand" href="/">📝 Notes</a>
 </div>
-    
+</nav>
+
+
+<!-- VIEW NOTE -->
+
+<div class="container mt-5">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-8 col-12">
+
+<div class="card p-4">
+
+<h4 class="mb-3">Your Note</h4>
+
+<p class="note-content intel-one-mono">
+
+<%= viewNote.text %>
+
+</p>
+
+<div class="d-flex justify-content-end gap-2 mt-3">
+
+<a
+href="/update/<%=viewNote.id%>"
+class="btn btn-warning">
+
+Update
+</a>
+
+<a
+href="/"
+class="btn btn-outline-secondary">
+
+Back
+</a>
+
 </div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </body>
 </html>
